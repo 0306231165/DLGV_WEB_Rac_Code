@@ -69,7 +69,14 @@ import PartnerMessagePage from '../pages/partner/messages/PartnerMessagePage';
 // =========================================================
 // 4. IMPORT PAGES — QUẢN TRỊ VIÊN (ADMIN)
 // =========================================================
-//import...
+import AdminLayout from '../layouts/AdminLayout';
+import AdminDashboard from '../pages/admin/dashboard/AdminDashboard';
+import AdminAccount from '../pages/admin/account/AdminAccount';
+import AdminApprovals from '../pages/admin/approvals/AdminApprovals';
+import AdminServices from '../pages/admin/services/AdminServices';
+import AdminBookings from '../pages/admin/bookings/AdminBookings';
+import AdminReports from '../pages/admin/reports/AdminReports';
+import AdminComplain from '../pages/admin/complain/AdminComplain';
 //------------------------------------------------------------------------------------------
 
 
@@ -155,12 +162,22 @@ const AppRouter = () => {
         {/* ========================================================= */}
         {/* TOÀN BỘ PHÂN VÙNG ADMIN                                  */}
         {/* ========================================================= */}
-        <Route path="/admin">
-          {/* <Route index element={<AdminDashboard />} /> */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Navigate to="/admin/dashboard" replace />} />
+          
+          {/* SỬA CHÍNH XÁC DÒNG NÀY: GỌI COMPONENT AdminDashboard VÀO ĐÂY */}
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="users" element={<AdminAccount />} />
+          <Route path="approvals" element={<AdminApprovals />} />
+          <Route path="services" element={<AdminServices />} />
+          <Route path="bookings" element={<AdminBookings />} />
+          <Route path="reports" element={<AdminReports />} />
+          <Route path="complain" element={<AdminComplain />} />
+
 
           {/* Cơ chế 3: Admin gõ sai URL trong phân vùng quản trị */}
           {/* Ví dụ: /admin/chuc-nang-linh-tinh -> đá về /admin */}
-          <Route path="*" element={<Navigate to="/admin" replace />} />
+          <Route path="/admin/*" element={<Navigate to="/admin" replace />} />
         </Route>
 
       </Routes>
